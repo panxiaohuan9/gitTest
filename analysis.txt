@@ -1,0 +1,57 @@
+访问网页流程：
+    1、浏览器发起请求"，使用http传输，
+    2、webserver服务器接收请求，然后将该请求传给后段应用，后段应用对请求进行逻辑、数据处理。
+    将处理后的数据返回webserver，
+    3、webserver将数据组成相应的格式返回给浏览器。
+**************************************************
+HTTPSERVER
+
+功能：httpserver
+
+    1、获取http请求，解析http请求，将请求发送给后端应用（webframe）
+
+    2、从webframe接收数据反馈，将数据组织Response发送给浏览器
+
+    webframe
+
+    1、从httpserver接收请求，根据数据请求进行逻辑处理
+    2、将数据发送给httpserver
+
+问题：
+    httpserver需要并发接收请求
+        IO多路复用(IO请求，数据请求补长期占用服务器)
+    httpserver双向通信
+        建立两个套接字
+    webframe并发
+        多线程
+    httpserver和webframe并发之间数据格式以什么格式传输
+        json（JavaScript定义的数据格式）
+        两个程序源代码不希望修改，有很多需要用户自己确定的内容（通过设置配置文件来解决）
+
+python中的json：
+    import json
+    json.dumps(d)字典专为json
+    json.loads()json转化为字典
+
+project:
+    httpserver: HttpServer.py
+                    创建套接字
+                config
+    webframe:webframe.py
+             static
+             setting.py
+             views.py 做数据处理
+             urls.py
+
+httpserver->webframe {'method':'get','info':'/'}
+webframe->httpserver {'status':200,'data':'xxx'}
+
+#!/usr/bin/env python3 表示指明解释器
+赋予权限
+chmod 777 xxx
+./xx.py
+
+sudo ln -s 路径 http  创建一个软连接
+http & 后台运行
+
+《python核心编程第三版》
